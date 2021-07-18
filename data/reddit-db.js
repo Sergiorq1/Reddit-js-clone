@@ -6,16 +6,18 @@ const url = 'mongodb://localhost/reddit-db';
 mongoose.connect(
   url,
   {
-    useNewUrlParser: true
+    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false,
   },
-  function(err, db) {
+  (err) => {
     assert.equal(null, err);
-    console.log('Connected successfully to database');
+    console.log("Connected successfully to database");
 
     // db.close(); turn on for testing
   }
 );
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection Error:'));
+
+//not sure if we need this following line or not
 mongoose.set('debug', true);
 
 module.exports = mongoose.connection;
